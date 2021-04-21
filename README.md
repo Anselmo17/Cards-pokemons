@@ -1,5 +1,5 @@
 # Grids de Cards pokemóns
-<img src="img/tela-cadastro-produtos.png">
+<img src="img/tela.png">
 
 ## Sistema criado com as seguintes tecnologias:
 * Html
