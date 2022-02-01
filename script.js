@@ -1,4 +1,4 @@
-const apiUrl = `https://pokeapi.co/api/v2/pokemon?offset=210&limit=20`;
+const apiUrl = `https://pokeapi.co/api/v2/pokemon?offset=0&limit=20`;
 let card = "";
 
 async function pokemons() {
@@ -6,7 +6,7 @@ async function pokemons() {
   const result = await fetch(apiUrl);
   const res = await result.json();
 
-  // chamando funca para obter os dados dos pokemons
+  // chamando funcao para obter os dados dos pokemons
   res.results.forEach(function (pokemon) {
     fetchPokemonData(pokemon);
   });
