@@ -18,10 +18,10 @@
   <!-- paginação -->
   <section class="paginacao-container">
     <div class="ls-pagination-filter">
-      <ul class="ls-pagination">
+      <ul class="ls-pagination" id="listPages">
         <li><a href="#">&laquo; Anterior</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
+        <li><a href="#" onclick="pokemons(1, itensByPage)">1</a></li>
+        <li><a href="#" onclick="pokemons(2, itensByPage)">2</a></li>
         <li><a href="#">3</a></li>
         <li><a href="#">4</a></li>
         <li><a href="#">5</a></li>
@@ -31,7 +31,7 @@
       <div class="ls-filter-view">
         Exibir
         <div class="ls-custom-select">
-          <select name="" id="qtdSelected" class="ls-select">
+          <select name="" id="qtdSelected" class="ls-select" onchange="selectedByQtdItens()">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
@@ -45,13 +45,16 @@
         ítens por página
       </div>
     </div>
+
+    <div id="totalItens">
+    </div>
   </section>
 
 
   <!-- loaging -->
   <div id="fundoLoading" class="fundoLoading" style="display: none;">
-    <div id="loader" style="display: none;" ></div>
-</div>
+    <div id="loader" style="display: none;"></div>
+  </div>
 
   <!-- Recebi lista de Pokemons -->
   <section class="container">
@@ -60,7 +63,7 @@
   <!-- JS -->
   <script type="text/javascript" src="./script.js"></script>
   <script type="text/javascript" src="./utils.js"></script>
-  
+
 </body>
 
 </html>

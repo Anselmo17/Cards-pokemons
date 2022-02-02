@@ -1,16 +1,22 @@
 let card = "";
 
-document.getElementById('qtdSelected').onchange = async function() {
+// pagination
+let pageAtual = 0;
+let itensByPage = 5;
+let totalPage = 0;
+
+async function selectedByQtdItens() {
 
   let select = document.getElementById('qtdSelected');
   const qtdSelected = select.options[select.selectedIndex].value;
-  
-  await pokemons(0 , qtdSelected);
+  itensByPage = qtdSelected;
+  await pokemons(pageAtual, qtdSelected);
 }
 
 
 async function pokemons(offset = 0, limit = 5) {
   card = '';
+  pageAtual = offset;
   const apiUrl = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
 
@@ -18,6 +24,15 @@ async function pokemons(offset = 0, limit = 5) {
   // chamando api de pokemons
   const result = await fetch(apiUrl);
   const res = await result.json();
+
+  totalPage = Math.ceil(res.count / itensByPage);
+
+  document.getElementById('totalItens').innerHTML = `
+  <div class="ls-filter-view">
+    Total de itens ${res.count}.
+  </div>
+  `
+
 
   // chamando funcao para obter os dados dos pokemons
   res.results.forEach(function (pokemon) {
