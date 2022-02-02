@@ -1,7 +1,8 @@
-const apiUrl = `https://pokeapi.co/api/v2/pokemon?offset=0&limit=20`;
 let card = "";
 
-async function pokemons() {
+async function pokemons(offset = 0, limit = 8) {
+  const apiUrl = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+
   // chamando api de pokemons
   const result = await fetch(apiUrl);
   const res = await result.json();
@@ -12,6 +13,7 @@ async function pokemons() {
   });
 }
 
+// busca pokemom pelo id
 async function fetchPokemonData(pokemon) {
   let url = pokemon.url;
   const response = await fetch(url);
@@ -27,8 +29,8 @@ async function fetchPokemonData(pokemon) {
      <h3 class="title">${pokeData.name}</h3>
       <img class="foto" src="${pokeData.sprites.front_default}">
       <div>
-      <h4>Tipos do pókemon</h4>
-       ${tiposPokemon}
+      <h4>Tipo do pókemon :</h4>
+       <p class='type-pokemon'>${tiposPokemon}</p>
       </div>
     </article>`;
 

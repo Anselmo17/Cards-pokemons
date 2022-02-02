@@ -1,5 +1,12 @@
-body {
+:root {
+  --cor-paginacao: aliceblue;
+  --cor-paginacao-hover: rgb(82, 223, 176);
+}
+html{
   background-color: #191e3a;
+}
+
+body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
@@ -11,6 +18,8 @@ h1 {
 
 .title {
   text-align: center;
+  margin-top: 40px;
+  text-transform: uppercase;
 }
 
 .container {
@@ -38,4 +47,30 @@ h1 {
 
 .item {
   list-style: none;
+  text-align: left;
+  font-size: 1em;
+  font-weight: 900;
+  color: white;
+  background-color: rgb(59, 9, 9);
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.paginacao-container {
+  margin: 20px auto 50px auto;
+  max-width: 1000px;
+  padding: 20px;
+}
+
+.ls-pagination-filter {
+  color: var(--cor-paginacao);
+}
+
+.ls-pagination li a {
+  color: var(--cor-paginacao);
+}
+
+.ls-pagination li a:hover {
+  color: var(--cor-paginacao-hover);
 }
