@@ -8,6 +8,7 @@
   <!-- Coloque o CSS no seu HEAD -->
   <link rel="stylesheet" href="./local.css">
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./loading.css">
 </head>
 
 <body onload="pokemons()">
@@ -30,8 +31,12 @@
       <div class="ls-filter-view">
         Exibir
         <div class="ls-custom-select">
-          <select name="" id="" class="ls-select">
+          <select name="" id="qtdSelected" class="ls-select">
+            <option value="5">5</option>
             <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
             <option value="30">30</option>
             <option value="50">50</option>
             <option value="100">100</option>
@@ -43,12 +48,19 @@
   </section>
 
 
+  <!-- loaging -->
+  <div id="fundoLoading" class="fundoLoading" style="display: none;">
+    <div id="loader" style="display: none;" ></div>
+</div>
+
   <!-- Recebi lista de Pokemons -->
   <section class="container">
   </section>
 
   <!-- JS -->
   <script type="text/javascript" src="./script.js"></script>
+  <script type="text/javascript" src="./utils.js"></script>
+  
 </body>
 
 </html>
