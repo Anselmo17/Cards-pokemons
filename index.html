@@ -5,10 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista Cards</title>
-  <!-- Coloque o CSS no seu HEAD -->
-  <link rel="stylesheet" href="./local.css">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./loading.css">
+  <!-- Favicon site -->
+  <link href="./img/favicon.ico" rel="icon" type="image/x-icon" />
+
+   <!-- Coloque o CSS no seu HEAD -->
+  <link rel="stylesheet" href="./css/local.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/loading.css">
 </head>
 
 <body onload="pokemons()">
@@ -16,16 +19,23 @@
   <h1 class="title">Cards Pokemóns</h1>
 
   <!-- paginação -->
+  <!-- 
+    desabilita = ls-disabled
+    habilita = ls-active
+  -->
   <section class="paginacao-container">
     <div class="ls-pagination-filter">
       <ul class="ls-pagination" id="listPages">
-        <li><a href="#">&laquo; Anterior</a></li>
-        <li><a href="#" onclick="pokemons(1, itensByPage)">1</a></li>
-        <li><a href="#" onclick="pokemons(2, itensByPage)">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">Próximo &raquo;</a></li>
+        <li class=""><a href="#" 
+          onclick="pokemons(pageAtual === 0 ? pageAtual: pageAtual -1 , itensByPage)">
+           &laquo; Anterior</a>
+        </li>
+         <!--   
+           <li><a href="#" onclick="pokemons(1, itensByPage)">1</a></li>
+           <li><a href="#" onclick="pokemons(2, itensByPage)">2</a></li>   
+           <li><a href="#" onclick="pokemons(2, itensByPage)">2</a></li>
+        -->
+        <li><a href="#" onclick="pokemons(pageAtual + 1, itensByPage)">Próximo &raquo;</a></li>
       </ul>
 
       <div class="ls-filter-view">
@@ -61,9 +71,8 @@
   </section>
 
   <!-- JS -->
-  <script type="text/javascript" src="./script.js"></script>
-  <script type="text/javascript" src="./utils.js"></script>
-
+  <script type="text/javascript" src="./js/script.js"></script>
+  <script type="text/javascript" src="./js/utils.js"></script>
 </body>
 
 </html>

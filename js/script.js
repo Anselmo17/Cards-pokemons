@@ -27,11 +27,9 @@ async function pokemons(offset = 0, limit = 5) {
 
   totalPage = Math.ceil(res.count / itensByPage);
 
-  document.getElementById('totalItens').innerHTML = `
-  <div class="ls-filter-view">
-    Total de itens ${res.count}.
-  </div>
-  `
+  // label total itens
+  const labelItens = `<span> Total de pokemons ${res.count}.</span>`;
+  document.getElementById('totalItens').innerHTML = labelItens;
 
 
   // chamando funcao para obter os dados dos pokemons

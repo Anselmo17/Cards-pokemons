@@ -27,7 +27,7 @@ h1 {
   margin: 10px auto;
   display: grid;
   /* dimensiona os cards d acordo com tela */
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   justify-content: center;
@@ -42,7 +42,8 @@ h1 {
 
 #totalItens {
   color: #f7f7f7;
-  font-size: .8em;
+  font-size: 0.8em;
+  margin-top: 60px;
 }
 
 .foto {
@@ -81,5 +82,9 @@ h1 {
 }
 
 .ls-pagination li a:hover {
+  color: var(--cor-paginacao-hover);
+}
+
+.ls-pagination li a:focus {
   color: var(--cor-paginacao-hover);
 }
