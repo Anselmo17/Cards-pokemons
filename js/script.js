@@ -25,12 +25,13 @@ async function pokemons(offset = 0, limit = 5) {
   const result = await fetch(apiUrl);
   const res = await result.json();
 
-  totalPage = Math.ceil(res.count / itensByPage);
 
   // label total itens
   const labelItens = `<span> Total de pokemons ${res.count}.</span>`;
   document.getElementById('totalItens').innerHTML = labelItens;
 
+  // monta paginacao
+  montaPages(offset, res.results.length);
 
   // chamando funcao para obter os dados dos pokemons
   res.results.forEach(function (pokemon) {
@@ -64,3 +65,41 @@ async function fetchPokemonData(pokemon) {
   cards.innerHTML = card;
   stadoLoaging(false);
 }
+
+// monta paginas
+
+function montaPages(offset, paginas) {
+
+  const pages = paginas > 5 ? 5 : paginas;
+  let linePages = '';
+  let linePaginacao = 0;
+  linePaginacao = offset;
+  let addDisabled = offset === 0 ? 'ls-disabled' : '';
+  // let addActive = offset === 0 ? 'ls-active' : '';
+
+  // monta as lista de paginas 
+  linePages +=
+    `
+   <li class="${addDisabled}"><a href="#" 
+          onclick="pokemons(${linePaginacao}, itensByPage)">
+           &laquo; Anterior</a>
+   </li>
+  `;
+
+  Array(pages).fill('').forEach((_, index) => {
+    const linePage = index + 1;
+    linePaginacao = offset + linePage;
+    linePages += `<li><a href="#" onclick="pokemons(${linePaginacao}, itensByPage)">${linePaginacao}</a></li>`;
+  })
+
+  linePages += `<li><a href="#" onclick="pokemons(${linePaginacao}, itensByPage)">Próximo &raquo;</a></li>`;
+
+  // listPages
+  const listPages = document.getElementById('listPages');
+  listPages.innerHTML = linePages;
+}
+
+
+
+
+
