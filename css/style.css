@@ -2,7 +2,7 @@
   --cor-paginacao: aliceblue;
   --cor-paginacao-hover: rgb(82, 223, 176);
 }
-html{
+html {
   background-color: #191e3a;
 }
 
@@ -24,10 +24,10 @@ h1 {
 
 .container {
   max-width: 1000px;
-  margin: 40px auto;
+  margin: 10px auto;
   display: grid;
   /* dimensiona os cards d acordo com tela */
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   justify-content: center;
@@ -37,12 +37,22 @@ h1 {
 .card {
   background-color: #ffc760;
   padding: 15px 15px 40px;
+  border-radius: 10px;
+}
+
+#totalItens {
+  color: #f7f7f7;
+  font-size: 0.8em;
+  margin-top: 60px;
 }
 
 .foto {
   width: 100%;
   height: 180px;
+  margin: 10px 0 10px 0;
   object-fit: cover;
+  background: #2a2525;
+  border-radius: 100px;
 }
 
 .item {
@@ -58,7 +68,7 @@ h1 {
 }
 
 .paginacao-container {
-  margin: 20px auto 50px auto;
+  margin: 20px auto 4px auto;
   max-width: 1000px;
   padding: 20px;
 }
@@ -72,5 +82,9 @@ h1 {
 }
 
 .ls-pagination li a:hover {
+  color: var(--cor-paginacao-hover);
+}
+
+.ls-pagination li a:focus {
   color: var(--cor-paginacao-hover);
 }
