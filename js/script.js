@@ -17,6 +17,9 @@ async function selectedByQtdItens() {
 async function pokemons(offset = 0, limit = 5) {
   card = '';
   pageAtual = offset;
+  if (offset < 0) {
+    return;
+  }
   const apiUrl = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
 
@@ -31,7 +34,7 @@ async function pokemons(offset = 0, limit = 5) {
   document.getElementById('totalItens').innerHTML = labelItens;
 
   // monta paginacao
-  montaPages(offset, res.results.length);
+  montaPages(offset, res);
 
   // chamando funcao para obter os dados dos pokemons
   res.results.forEach(function (pokemon) {
@@ -68,20 +71,24 @@ async function fetchPokemonData(pokemon) {
 
 // monta paginas
 
-function montaPages(offset, paginas) {
+function montaPages(offset, pokemons) {
 
+  const paginas = pokemons.results.length
   const pages = paginas > 5 ? 5 : paginas;
   let linePages = '';
   let linePaginacao = 0;
   linePaginacao = offset;
-  let addDisabled = offset === 0 ? 'ls-disabled' : '';
-  // let addActive = offset === 0 ? 'ls-active' : '';
 
+  // adiciona validação no botao
+  let addDisabled = !pokemons.previous ? 'ls-disabled' : '';
+  let addLastDisabled = !pokemons.next ? 'ls-disabled' : '';
+
+  // let addActive = offset === 0 ? 'ls-active' : '';
   // monta as lista de paginas 
   linePages +=
     `
    <li class="${addDisabled}"><a href="#" 
-          onclick="pokemons(${linePaginacao}, itensByPage)">
+          onclick="pokemons(${linePaginacao} - 1, itensByPage)">
            &laquo; Anterior</a>
    </li>
   `;
@@ -92,7 +99,7 @@ function montaPages(offset, paginas) {
     linePages += `<li><a href="#" onclick="pokemons(${linePaginacao}, itensByPage)">${linePaginacao}</a></li>`;
   })
 
-  linePages += `<li><a href="#" onclick="pokemons(${linePaginacao}, itensByPage)">Próximo &raquo;</a></li>`;
+  linePages += `<li class="${addLastDisabled}"><a href="#" onclick="pokemons(${linePaginacao}, itensByPage)">Próximo &raquo;</a></li>`;
 
   // listPages
   const listPages = document.getElementById('listPages');
