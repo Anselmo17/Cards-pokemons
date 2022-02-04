@@ -5,22 +5,20 @@ let pageAtual = 0;
 let itensByPage = 5;
 let totalPage = 0;
 
-async function selectedByQtdItens() {
 
-  let select = document.getElementById('qtdSelected');
-  const qtdSelected = select.options[select.selectedIndex].value;
-  itensByPage = qtdSelected;
-  await pokemons(pageAtual, qtdSelected);
-}
-
-
-async function pokemons(offset = 0, limit = 5) {
+async function pokemons(offset = 0, limit = 5, remontePage = true) {
   card = '';
   pageAtual = offset;
+
+  // valida pagina
+  if (offset < 0) {
+    return;
+  }
+
   const apiUrl = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
-
   stadoLoaging(true);
+
   // chamando api de pokemons
   const result = await fetch(apiUrl);
   const res = await result.json();
@@ -30,8 +28,11 @@ async function pokemons(offset = 0, limit = 5) {
   const labelItens = `<span> Total de pokemons ${res.count}.</span>`;
   document.getElementById('totalItens').innerHTML = labelItens;
 
+
   // monta paginacao
-  montaPages(offset, res.results.length);
+  if (remontePage) {
+    montaPages(offset, res);
+  }
 
   // chamando funcao para obter os dados dos pokemons
   res.results.forEach(function (pokemon) {
@@ -66,40 +67,55 @@ async function fetchPokemonData(pokemon) {
   stadoLoaging(false);
 }
 
-// monta paginas
+// selected qtd itens page
+async function selectedByQtdItens() {
 
-function montaPages(offset, paginas) {
+  let select = document.getElementById('qtdSelected');
+  const qtdSelected = select.options[select.selectedIndex].value;
+  itensByPage = qtdSelected;
+  await pokemons(pageAtual, qtdSelected);
+}
 
+
+// monta as paginas
+function montaPages(offset, pokemons, remontePage = true) {
+
+  const paginas = pokemons.results.length
   const pages = paginas > 5 ? 5 : paginas;
   let linePages = '';
   let linePaginacao = 0;
   linePaginacao = offset;
-  let addDisabled = offset === 0 ? 'ls-disabled' : '';
-  // let addActive = offset === 0 ? 'ls-active' : '';
 
+
+  // adiciona validação no botao
+  let addDisabled = !pokemons.previous ? 'ls-disabled' : '';
+  let addLastDisabled = !pokemons.next ? 'ls-disabled' : '';
+
+  // let addActive = offset === 0 ? 'ls-active' : '';
   // monta as lista de paginas 
   linePages +=
     `
-   <li class="${addDisabled}"><a href="#" 
-          onclick="pokemons(${linePaginacao}, itensByPage)">
-           &laquo; Anterior</a>
-   </li>
-  `;
+ <li class="${addDisabled}"><a href="#" 
+        onclick="pokemons(${linePaginacao} - 1, itensByPage)">
+         &laquo; Anterior</a>
+ </li>
+`;
 
   Array(pages).fill('').forEach((_, index) => {
-    const linePage = index + 1;
-    linePaginacao = offset + linePage;
-    linePages += `<li><a href="#" onclick="pokemons(${linePaginacao}, itensByPage)">${linePaginacao}</a></li>`;
+    // const linePage = index + 1;
+    linePaginacao = offset + index;
+    const item = linePaginacao;
+    linePages += `<li id="${linePaginacao}" onclick="pokemons(${item}, itensByPage, false)"><a href="#">${linePaginacao + 1}</a></li>`;
   })
 
-  linePages += `<li><a href="#" onclick="pokemons(${linePaginacao}, itensByPage)">Próximo &raquo;</a></li>`;
+  linePages += `<li class="${addLastDisabled}"
+                onclick="pokemons(${linePaginacao} + 1, itensByPage)"
+                ><a href="#">Próximo &raquo;</a>
+              </li>`;
 
   // listPages
   const listPages = document.getElementById('listPages');
   listPages.innerHTML = linePages;
 }
-
-
-
 
 
