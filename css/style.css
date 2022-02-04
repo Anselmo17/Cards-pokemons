@@ -88,3 +88,7 @@ h1 {
 .ls-pagination li a:focus {
   color: var(--cor-paginacao-hover);
 }
+
+.ls-custom-select:hover {
+  cursor: pointer !important;
+}
